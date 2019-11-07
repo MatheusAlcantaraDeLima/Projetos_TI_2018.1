@@ -1,0 +1,51 @@
+<ion-header>
+    <ion-toolbar>
+  
+      <ion-title>Medicamento</ion-title>
+  
+      <ion-buttons slot="end">
+          <ion-button  (click)="fechar()">Fechar</ion-button>
+      </ion-buttons>
+  
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+  
+    <ion-list>
+  
+      <ion-item>
+        <ion-input placeholder="Nome do Medicamento"></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-input placeholder="Dose do Medicamento"></ion-input>
+      </ion-item>
+  
+      <ion-item>
+       <ion-label>Início do tratamento</ion-label>
+        <ion-datetime placeholder="Data" display-format="DD/MM/YYYY"></ion-datetime>
+      </ion-item> 
+  
+      <ion-item>
+        <ion-label>Fim do tratamento</ion-label>
+        <ion-datetime placeholder="Data" display-format="DD/MM/YYYY"></ion-datetime>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label>Horário do medicamento</ion-label>
+        <ion-datetime display-format="HH:mm" picker-format="HH:mm"></ion-datetime>
+        <ion-textarea></ion-textarea>
+      </ion-item>
+  
+      <ion-button color="success" expand="block" type="submit" class="ion-no-margin">Adcionar Mais horários.</ion-button>
+  
+    </ion-list>
+  
+  
+  
+    <div class="ion-padding">
+      <ion-button color="success" expand="block" type="submit" class="ion-no-margin">Cadastrar Medicamento !</ion-button>
+    </div>
+  
+  </ion-content>

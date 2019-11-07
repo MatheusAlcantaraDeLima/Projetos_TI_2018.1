@@ -1,0 +1,175 @@
+CREATE TABLE Usuario (
+id_usuario INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+email_usuario VARCHAR (100) NOT NULL,
+senha_usuario VARCHAR (20) NOT NULL
+);
+
+CREATE TABLE Dependente (
+	id_dependente INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    nome_dependente       VARCHAR (100) NOT NULL,
+    nascimento_dependente DATE  ,
+    obs_dependente        VARCHAR (255),
+    id_usuario            INTEGER,      
+CONSTRAINT fk_id_usuario_usua FOREIGN KEY (id_usuario) REFERENCES Usuario (id_usuario)	
+);
+
+CREATE TABLE Consulta (
+id_consulta INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+nome_medico VARCHAR (100), 
+nome_especialidade VARCHAR (100) NOT NULL,
+data_consulta DATE  NOT NULL,
+horario_consulta TIME  NOT NULL,
+id_dependente INTEGER NOT NULL,
+CONSTRAINT fk_id_dependente_dep1 FOREIGN KEY (id_dependente) REFERENCES Dependente (id_dependente)
+)
+
+CREATE TABLE Horario (
+id_horario INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+horario_medicamento TIME NOT NULL
+);
+
+CREATE TABLE Medicamento (
+id_medicamento INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+nome_medicamento VARCHAR (100)  NOT NULL,
+dose_medicamento VARCHAR (50) NOT NULL,
+data_inicio DATE NOT NULL,
+data_final DATE NOT NULL,
+horario_inicio TIME  NOT NULL,
+id_intervalo INTEGER  NOT NULL,
+CONSTRAINT fk_id_intervalo_inter FOREIGN KEY (id_intervalo) REFERENCES Intervalo (id_intervalo)
+);
+
+CREATE TABLE Medicamento_Horario (
+id_medicamento INTEGER NOT NULL,
+id_horario INTEGER  NOT NULL,
+dia_medicamento DATE,
+CONSTRAINT fk_id_medicamento_med1 FOREIGN KEY (id_medicamento) REFERENCES Medicamento (id_medicamento),
+CONSTRAINT fk_id_horario_hor1 FOREIGN KEY (id_horario) REFERENCES Horario (id_horario),
+PRIMARY KEY ( id_medicamento, id_horario )
+);
+
+CREATE TABLE Intervalo (
+    id_intervalo  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    intervalo_medicamento TIME NOT NULL    
+);
+
+CREATE TABLE Dependente_Medicamento (
+id_dependente INTEGER NOT NULL ,
+id_medicamento INTEGER NOT NULL ,
+CONSTRAINT fk_id_dependente_dep2 FOREIGN KEY ( id_dependente)  REFERENCES Dependente  (id_dependente),
+CONSTRAINT fk_id_medicamento_med3 FOREIGN KEY ( id_medicamento) REFERENCES Medicamento (id_medicamento),
+PRIMARY KEY (id_dependente, id_medicamento )
+);
+
+
+   QUERYS
+   
+   SELECT Dependente.nome_dependente, Medicamento.nome_medicamento, Medicamento.data_inicio, Medicamento.data_final, Medicamento.horario_inicio, Medicamento.dose_medicamento, Horario.horario_medicamento, Medicamento_Horario.dia_medicamento, Intervalo.intervalo_medicamento       
+FROM Dependente, Medicamento, Horario, Medicamento_Horario, Intervalo
+INNER JOIN Dependente_Medicamento
+WHERE Dependente.id_dependente = Dependente_Medicamento.id_dependente
+AND Medicamento.id_medicamento = Dependente_Medicamento.id_medicamento
+AND    Medicamento.id_medicamento = Medicamento_Horario.id_medicamento
+AND Horario.id_horario = Medicamento_Horario.id_horario
+AND    Intervalo.id_intervalo = Medicamento.id_intervalo
+
+SELECT Dependente.nome_dependente, Medicamento.nome_medicamento, Medicamento.data_inicio, Medicamento.data_final, Medicamento.horario_inicio, Medicamento.dose_medicamento, Horario.horario_medicamento, Medicamento_Horario.dia_medicamento, Intervalo.intervalo_medicamento       
+FROM Dependente, Medicamento, Horario, Medicamento_Horario, Intervalo
+INNER JOIN Dependente_Medicamento
+WHERE Dependente.id_dependente = Dependente_Medicamento.id_dependente
+AND Medicamento.id_medicamento = Dependente_Medicamento.id_medicamento
+AND    Medicamento.id_medicamento = Medicamento_Horario.id_medicamento
+AND Horario.id_horario = Medicamento_Horario.id_horario
+AND    Intervalo.id_intervalo = Medicamento.id_intervalo
+AND Dependente.id_dependente = 3
+
+
+SELECT Dependente.nome_dependente, Medicamento.nome_medicamento, Medicamento.data_inicio, Medicamento.data_final, Medicamento.horario_inicio, Medicamento.dose_medicamento, Horario.horario_medicamento, Medicamento_Horario.dia_medicamento
+FROM Dependente, Medicamento, Horario, Medicamento_Horario
+INNER JOIN Dependente_Medicamento
+WHERE Dependente.id_dependente = Dependente_Medicamento.id_dependente
+AND Medicamento.id_medicamento = Dependente_Medicamento.id_medicamento
+AND    Medicamento.id_medicamento = Medicamento_Horario.id_medicamento
+AND Horario.id_horario = Medicamento_Horario.id_horario
+
+
+
+SELECT Dependente.nome_dependente, Medicamento.nome_medicamento, Medicamento.data_inicio, Medicamento.data_final, Medicamento.horario_inicio, Medicamento.dose_medicamento, Horario.horario_medicamento, Medicamento_Horario.dia_medicamento       
+FROM Dependente, Medicamento, Horario, Medicamento_Horario
+INNER JOIN Dependente_Medicamento
+WHERE Dependente.id_dependente = Dependente_Medicamento.id_dependente
+AND Medicamento.id_medicamento = Dependente_Medicamento.id_medicamento
+AND    Medicamento.id_medicamento = Medicamento_Horario.id_medicamento
+AND Horario.id_horario = Medicamento_Horario.id_horario
+AND Dependente.id_dependente = 3
+
+
+
+
+SELECT Dependente.nome_dependente, Medicamento.nome_medicamento, Medicamento.dose_medicamento, Medicamento.data_inicio, Medicamento.data_final, Horario.horario_medicamento, Medicamento_Horario.dia_medicamento
+FROM Dependente, Medicamento, Horario, Medicamento_Horario
+INNER JOIN Dependente_Medicamento
+WHERE Dependente.id_dependente = Dependente_Medicamento.id_dependente
+AND Medicamento.id_medicamento = Dependente_Medicamento.id_medicamento
+AND    Medicamento.id_medicamento = Medicamento_Horario.id_medicamento
+AND Horario.id_horario = Medicamento_Horario.id_horario
+
+
+
+
+
+SELECT Dependente.nome_dependente, Medicamento.nome_medicamento, Horario.horario_medicamento
+FROM Dependente, Medicamento, Horario
+INNER JOIN Dependente_Medicamento
+INNER JOIN Medicamento_Horario 
+WHERE Dependente.id_dependente = Dependente_Medicamento.id_dependente
+AND Medicamento.id_medicamento = Dependente_Medicamento.id_medicamento
+AND    Medicamento.id_medicamento = Medicamento_Horario.id_medicamento
+AND Horario.id_horario = Medicamento_Horario.id_horario
+
+
+SELECT Dependente.nome_dependente, Medicamento.nome_medicamento
+FROM Dependente, Medicamento
+INNER JOIN Dependente_Medicamento
+WHERE Dependente.id_dependente = Dependente_Medicamento.id_dependente
+AND Medicamento.id_medicamento = Dependente_Medicamento.id_medicamento
+
+
+
+SELECT Consulta.nome_medico, Consulta.nome_especialidade, Consulta.data_consulta, Consulta.horario_consulta, Dependente.nome_dependente
+FROM Consulta, Dependente
+WHERE Consulta.id_consulta = Dependente.id_dependente
+
+
+
+
+SELECT Dependente.nome_dependente, Medicamento.nome_medicamento, Medicamento.horario_inicio, Intervalo.intervalo_medicamento       
+FROM Dependente, Medicamento, Intervalo
+INNER JOIN Dependente_Medicamento
+WHERE Dependente.id_dependente = Dependente_Medicamento.id_dependente
+AND Medicamento.id_medicamento = Dependente_Medicamento.id_medicamento
+AND    Intervalo.id_intervalo = Medicamento.id_intervalo
+
+
+
+
+SELECT Dependente.nome_dependente, Medicamento.nome_medicamento, Medicamento.horario_inicio, Intervalo.intervalo_medicamento
+FROM Dependente, Medicamento, Intervalo, Dependente_Medicamento
+WHERE Dependente.id_dependente = Medicamento.id_medicamento
+AND Medicamento.id_intervalo = Intervalo.id_intervalo
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+	

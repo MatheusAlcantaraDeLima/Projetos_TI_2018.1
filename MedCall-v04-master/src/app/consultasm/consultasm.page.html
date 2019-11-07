@@ -1,0 +1,42 @@
+<ion-header>
+    <ion-toolbar>
+  
+      <ion-title>Consultas</ion-title>
+  
+      <ion-buttons slot="end">
+          <ion-button  (click)="fechar()">Fechar</ion-button>
+      </ion-buttons>
+      
+    </ion-toolbar>
+  </ion-header>
+    
+    <ion-content>
+    
+      <ion-list>
+    
+        <ion-item>
+          <ion-input placeholder="Nome Médico"></ion-input>
+        </ion-item>
+    
+        <ion-item>
+          <ion-input placeholder="Especialidade do médico"></ion-input>
+        </ion-item>
+    
+        <ion-item>
+         <ion-label>Data Consulta</ion-label>
+          <ion-datetime placeholder="Data" display-format="DD/MM/YYYY"></ion-datetime>
+        </ion-item> 
+    
+        <ion-item>
+          <ion-label>Horário da Consulta</ion-label>
+          <ion-datetime display-format="HH:mm" picker-format="HH:mm"></ion-datetime>
+          <ion-textarea></ion-textarea>
+        </ion-item>
+    
+      </ion-list>
+    
+      <div class="ion-padding">
+        <ion-button color="success" expand="block" type="submit" class="ion-no-margin">Cadastrar Consulta !</ion-button>
+      </div>
+    
+    </ion-content>

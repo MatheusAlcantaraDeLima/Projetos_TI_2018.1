@@ -1,0 +1,15 @@
+npm install @angular/fire firebase --save
+npm install @angular/cli
+npm i -g ionic cordova
+
+
+(dentro da pasta do app)
+npm install
+npm i rxjs
+npm i -g cordova
+npm i ionic-angular
+npm i @angular/http
+npm i @angular/router
+npm i @ionic-native/push
+ionic cordova platform add android
+ionic cordova platform add ios

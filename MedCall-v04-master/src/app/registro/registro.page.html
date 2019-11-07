@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>registro</ion-title>
+
+  <ion-buttons slot="end">
+    <ion-button  (click)="fechar()">Fechar</ion-button>
+  </ion-buttons>
+  
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+
+  <form [formGroup] = "usuarioForm" (submit)="(editable) ? editUsuario() : addUsuario()">
+
+    <ion-list lines="full" class="ion-no-padding ion-no-padding">
+      <ion-item>
+        <ion-label position="stacked">E-mail <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input formControlName="email_usuario" required type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Senha <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input formControlName="senha_usuario" required type="text"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button [disabled]="usuarioForm.invalid" expand="block" type="submit" color="dark" class="ion-no-margin">Registrar</ion-button>
+    </div>
+  </form>
+
+</ion-content>

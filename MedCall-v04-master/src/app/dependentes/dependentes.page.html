@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>
+     Dependentes
+    </ion-title>
+
+    <ion-buttons slot="end">
+        <ion-button  href="/login">
+          <ion-icon name="log-out"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-button  horizontal="center" color="success" expand="block" (click)="openDependentesm()">Registre o seu Dependente</ion-button>
+</ion-content>
+
+<ion-content>
+    <ion-tabs>
+        <ion-tab-bar slot="bottom">
+      
+          <ion-tab-button href="../dependentes">
+            <ion-icon name="contacts"></ion-icon>
+            <ion-label>Dependentes</ion-label>
+          </ion-tab-button>
+      
+          <ion-tab-button href="../medicamentos">
+            <ion-icon name="medkit"></ion-icon>
+            <ion-label>Medicamento</ion-label>
+          </ion-tab-button>
+      
+          <ion-tab-button href="../consultas">
+            <ion-icon name="calendar"></ion-icon>
+            <ion-label>Consultas</ion-label>
+          </ion-tab-button>
+          
+        </ion-tab-bar>
+      
+      </ion-tabs>
+    </ion-content>
